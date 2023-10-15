@@ -76,8 +76,14 @@ class NavePasajero inherits Nave{
 	method cargarComida(cuanto){
 		comidas = comidas + cuanto
 	}
+	method descargarComida(cuanto){
+		comidas = 0.max(comidas - cuanto)
+	}
 	method cargarBebida(cuanto){
 		bebidas = bebidas + cuanto
+	}
+	method descargarBebida(cuanto){
+		bebidas = 0.max(bebidas - cuanto)
 	}
 	override method prepararViaje(){
 		bebidas = 6 * pasajeros
@@ -137,9 +143,7 @@ class NaveCombate inherits Nave{
 	method emitirMensaje(mensaje){
 		mensajes.add(mensaje)
 	}
-	method mensajesEmitidos(){
-		return mensajes.size()
-	}
+	method mensajesEmitidos() = mensajes
 	method primerMensajeEmitido(){
 		return mensajes.first()
 	}
