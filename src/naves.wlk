@@ -178,9 +178,11 @@ class NaveCombate inherits Nave{
 	override method estaTranquila(){
 		return super() and not misilesDesplegados
 	}
-	override method recibirAmenaza(){
+	override method escapar(){
 		self.acercarseUnPocoAlSol()
 		self.acercarseUnPocoAlSol()
+	}
+	override method avisar(){
 		self.emitirMensaje("Amenaza recibida")
 	}
 	override method estaDeRelajo(){
@@ -192,7 +194,7 @@ class NaveSigilosa inherits NaveCombate{
 	override method estaTranquila(){
 		return super() and not self.estaInvisible()
 	}
-	override method recibirAmenaza(){
+	override method escapar(){
 		super()
 		self.desplegarMisiles()
 		self.ponerseInvisible()
