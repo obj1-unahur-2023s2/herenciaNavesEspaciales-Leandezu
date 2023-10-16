@@ -38,7 +38,12 @@ class Nave{
 		return combustible >= 4000 and
 		velocidad <= 12000
 	}
-	method recibirAmenaza()
+	method recibirAmenaza(){
+		self.escapar()
+		self.avisar()
+	}
+	method escapar()
+	method avisar()
 	method estaDeRelajo()
 }
 
@@ -58,8 +63,10 @@ class NaveBaliza inherits Nave{
 	override method estaTranquila(){
 		return super() and color != "rojo"
 	}
-	override method recibirAmenaza(){
+	override method escapar(){
 		self.irHaciaElSol()
+	}
+	override method avisar(){
 		self.cambiarColorDeBaliza("rojo")
 	}
 	override method estaDeRelajo(){
@@ -90,11 +97,13 @@ class NavePasajero inherits Nave{
 		comidas = 4 * pasajeros
 		self.acercarseUnPocoAlSol()
 	}
-	override method recibirAmenaza(){
-		self.acelerar(velocidad * 2)
-		comidas = 0.max(comidas - pasajeros)
-		contComidasServidas += pasajeros 
-		bebidas = 0.max(bebidas - (2 * pasajeros))
+	override method escapar(){
+		self.acelerar(velocidad)
+	}
+	override method avisar(){
+		self.descargarComida(pasajeros)
+		self.descargarBebida(2 * pasajeros)
+		contComidasServidas += pasajeros
 	}
 	override method estaDeRelajo(){
 		return contComidasServidas <= 50
@@ -115,7 +124,7 @@ class NaveHospital inherits NavePasajero{
 	override method estaTranquila(){
 		return not self.losQuirofanosEstanPreparados()
 	}
-	override method recibirAmenaza(){
+	override method avisar(){
 		super()
 		self.prepararQuirofanos()
 	}
